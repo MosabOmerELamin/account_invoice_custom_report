@@ -2,7 +2,7 @@
 <odoo>
   <data>
     <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
-      <!-- Insert header inside the main page container (safer: match any div with class containing 'page') -->
+      <!-- Insert header inside any div whose class contains "page" (safer xpath) -->
       <xpath expr="//div[contains(@class,'page')]" position="inside">
         <div class="custom-invoice-header">
           <div class="custom-invoice-header-inner">
@@ -27,12 +27,28 @@
                   <span t-esc="'INV-' + (o.name or '')"/>
                 </div>
               </div>
+              <div class="company-info-grid">
+                <div class="company-info-left box">
+                  <h3>Company Information</h3>
+                  <p><strong>CR No:</strong> <span t-esc="o.company_id.l10n_sa_cr_no or o.company_id.vat or ''"/></p>
+                  <p><strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/></p>
+                  <p><strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/></p>
+                </div>
+                <div class="company-info-right box">
+                  <h3>معلومات الشركة</h3>
+                  <p><strong>السجل التجاري:</strong> <span t-esc="o.company_id.l10n_sa_cr_no or ''"/></p>
+                  <p><strong>الضريبة:</strong> <span t-esc="o.company_id.vat or ''"/></p>
+                  <p><strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <!-- content wrapper -->
+        <div class="custom-invoice-content"/>
       </xpath>
 
-      <!-- Add custom class to footer if present -->
+      <!-- Add custom footer class if footer exists -->
       <xpath expr="//div[contains(@class,'footer')]" position="attributes">
         <attribute name="class">footer custom-invoice-footer</attribute>
       </xpath>
