@@ -63,8 +63,8 @@
                     <tr>
                       <td style="padding:8px;"><t t-esc="line.name"/></td>
                       <td style="padding:8px; text-align:center;"><t t-esc="line.quantity"/></td>
-                      <td style="padding:8px; text-align:center;"><t t-field="line.price_unit"/></td>
-                      <td style="padding:8px; text-align:right;"><t t-field="line.price_subtotal"/></td>
+                      <td style="padding:8px; text-align:center;"><span t-field="line.price_unit"/></td>
+                      <td style="padding:8px; text-align:right;"><span t-field="line.price_subtotal"/></td>
                     </tr>
                   </t>
                 </tbody>
