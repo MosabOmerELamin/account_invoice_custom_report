@@ -1,57 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
-      <!-- Insert header inside any div whose class contains "page" (safer xpath) -->
-      <xpath expr="//div[contains(@class,'page')]" position="inside">
-        <div class="custom-invoice-header">
-          <div class="custom-invoice-header-inner">
-            <div class="left-block">
-              <div class="logo-box">
-                <t t-if="o.company_id.logo">
-                  <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" class="company-logo"/>
-                </t>
-                <t t-if="not o.company_id.logo">
-                  <div class="placeholder-logo">COMPANY<br/>LOGO</div>
-                </t>
-              </div>
-              <div class="company-title">
-                <h1><span t-field="o.company_id.name"/></h1>
-                <div class="company-title-ar" t-esc="o.company_id.website or ''"/>
-              </div>
-            </div>
-            <div class="right-block">
-              <div class="invoice-title">
-                <h2>Invoice / فاتورة</h2>
-                <div class="invoice-number">
-                  <span t-esc="'INV-' + (o.name or '')"/>
-                </div>
-              </div>
-              <div class="company-info-grid">
-                <div class="company-info-left box">
-                  <h3>Company Information</h3>
-                  <p><strong>CR No:</strong> <span t-esc="o.company_id.l10n_sa_cr_no or o.company_id.vat or ''"/></p>
-                  <p><strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/></p>
-                  <p><strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/></p>
-                </div>
-                <div class="company-info-right box">
-                  <h3>معلومات الشركة</h3>
-                  <p><strong>السجل التجاري:</strong> <span t-esc="o.company_id.l10n_sa_cr_no or ''"/></p>
-                  <p><strong>الضريبة:</strong> <span t-esc="o.company_id.vat or ''"/></p>
-                  <p><strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- content wrapper -->
-        <div class="custom-invoice-content"/>
-      </xpath>
+  <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
+    <xpath expr="." position="replace">
+      <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+          <div class="page" style="font-family: 'Arial'; border-radius:10px; overflow:hidden;">
 
-      <!-- Add custom footer class if footer exists -->
-      <xpath expr="//div[contains(@class,'footer')]" position="attributes">
-        <attribute name="class">footer custom-invoice-footer</attribute>
-      </xpath>
-    </template>
-  </data>
+            <!-- Header -->
+            <div style="background-color:#213a5c; color:white; padding:15px;">
+              <div style="display:flex; justify-content:space-between;">
+                <div>
+                  <h2 style="margin:0;">Global Trading Co.</h2>
+                  <p style="margin:0;">شركة التجارة العالمية</p>
+                </div>
+                <div>
+                  <h3 style="margin:0;">Invoice / فاتورة</h3>
+                  <p style="margin:0;">INV-<t t-esc="o.name"/></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Company Info -->
+            <div style="display:flex; justify-content:space-between; background:#e8eef5; padding:10px 20px;">
+              <div>
+                <p><strong>CR No:</strong> <t t-esc="o.company_id.company_registry or ''"/></p>
+                <p><strong>VAT No:</strong> <t t-esc="o.company_id.vat or ''"/></p>
+                <p><strong>Tel:</strong> <t t-esc="o.company_id.phone or ''"/></p>
+              </div>
+              <div style="text-align:right;">
+                <p><strong>السجل التجاري:</strong> <t t-esc="o.company_id.company_registry or ''"/></p>
+                <p><strong>الرقم الضريبي:</strong> <t t-esc="o.company_id.vat or ''"/></p>
+                <p><strong>هاتف:</strong> <t t-esc="o.company_id.phone or ''"/></p>
+              </div>
+            </div>
+
+            <!-- Customer Info -->
+            <div style="padding:10px 20px;">
+              <div style="display:flex; justify-content:space-between;">
+                <div>
+                  <p><strong>Customer:</strong> <t t-esc="o.partner_id.name"/></p>
+                  <p><strong>Address:</strong> <t t-esc="o.partner_id.contact_address or ''"/></p>
+                </div>
+                <div style="text-align:right;">
+                  <p><strong>العميل:</strong> <t t-esc="o.partner_id.name"/></p>
+                  <p><strong>العنوان:</strong> <t t-esc="o.partner_id.contact_address or ''"/></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Line Items -->
+            <div style="padding:10px 20px;">
+              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc;">
+                <thead style="background:#213a5c; color:white;">
+                  <tr>
+                    <th style="padding:8px; text-align:left;">Description</th>
+                    <th style="padding:8px; text-align:center;">Qty</th>
+                    <th style="padding:8px; text-align:center;">Unit Price</th>
+                    <th style="padding:8px; text-align:right;">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <t t-foreach="o.invoice_line_ids" t-as="line">
+                    <tr>
+                      <td style="padding:8px;"><t t-esc="line.name"/></td>
+                      <td style="padding:8px; text-align:center;"><t t-esc="line.quantity"/></td>
+                      <td style="padding:8px; text-align:center;"><t t-field="line.price_unit"/></td>
+                      <td style="padding:8px; text-align:right;"><t t-field="line.price_subtotal"/></td>
+                    </tr>
+                  </t>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Totals -->
+            <div style="padding:10px 20px; text-align:right;">
+              <p><strong>Subtotal:</strong> <t t-field="o.amount_untaxed"/></p>
+              <p><strong>Tax:</strong> <t t-field="o.amount_tax"/></p>
+              <h3><strong>Total:</strong> <t t-field="o.amount_total"/></h3>
+            </div>
+
+            <!-- Footer -->
+            <div style="background-color:#1e2b35; color:white; padding:10px 20px; text-align:center;">
+              <p>Thank you for your business | شكراً لتعاملكم معنا</p>
+            </div>
+
+          </div>
+        </t>
+      </t>
+    </xpath>
+  </template>
 </odoo>
