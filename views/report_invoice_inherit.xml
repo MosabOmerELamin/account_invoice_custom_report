@@ -47,77 +47,11 @@
 
       <!-- Insert a content wrapper that will contain the original doc content (lines, totals) -->
       <div class="custom-invoice-content">
-        <!-- Optional content area message (centered dashed box like the screenshot) -->
-        <!-- We keep the existing invoice body from the original template by referencing the original structure.
-             The original template commonly uses class="invoice" or has specific blocks. We put a wrapper and then
-             let the remaining original nodes render inside. -->
+        <!-- Original invoice body will render here -->
       </div>
     </xpath>
 
-    <!-- Move the original "footer" inside our custom footer section by modifying existing footer area -->
-    <xpath expr="//div[@class='footer']" position="attributes">
-      <attribute name="class">footer custom-invoice-footer</attribute>
-    </xpath>
-  </template>
-</odoo>
-
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-  <!-- Inherit the main invoice report template -->
-  <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
-    <xpath expr="//div[@class='page']" position="inside">
-      <!-- Add top header block before existing content wrapper -->
-      <div class="custom-invoice-header">
-        <div class="custom-invoice-header-inner">
-          <div class="left-block">
-            <div class="logo-box">
-              <t t-if="o.company_id.logo">
-                <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" class="company-logo"/>
-              </t>
-              <t t-if="not o.company_id.logo">
-                <div class="placeholder-logo">COMPANY<br/>LOGO</div>
-              </t>
-            </div>
-            <div class="company-title">
-              <h1><span t-field="o.company_id.name"/></h1>
-              <div class="company-title-ar" t-esc="o.company_id.website or ''"/>
-            </div>
-          </div>
-          <div class="right-block">
-            <div class="invoice-title">
-              <h2>Invoice / فاتورة</h2>
-              <div class="invoice-number">
-                <span t-esc="'INV-' + (o.name or '')"/>
-              </div>
-            </div>
-            <div class="company-info-grid">
-              <div class="company-info-left box">
-                <h3>Company Information</h3>
-                <p><strong>CR No:</strong> <span t-esc="o.company_id.l10n_sa_cr_no or o.company_id.vat or ''"/></p>
-                <p><strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/></p>
-                <p><strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/></p>
-              </div>
-              <div class="company-info-right box">
-                <h3>معلومات الشركة</h3>
-                <p><strong>السجل التجاري:</strong> <span t-esc="o.company_id.l10n_sa_cr_no or ''"/></p>
-                <p><strong>الضريبة:</strong> <span t-esc="o.company_id.vat or ''"/></p>
-                <p><strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Insert a content wrapper that will contain the original doc content (lines, totals) -->
-      <div class="custom-invoice-content">
-        <!-- Optional content area message (centered dashed box like the screenshot) -->
-        <!-- We keep the existing invoice body from the original template by referencing the original structure.
-             The original template commonly uses class="invoice" or has specific blocks. We put a wrapper and then
-             let the remaining original nodes render inside. -->
-      </div>
-    </xpath>
-
-    <!-- Move the original "footer" inside our custom footer section by modifying existing footer area -->
+    <!-- Add custom class to footer -->
     <xpath expr="//div[@class='footer']" position="attributes">
       <attribute name="class">footer custom-invoice-footer</attribute>
     </xpath>
