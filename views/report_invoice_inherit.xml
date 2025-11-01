@@ -103,16 +103,20 @@
               <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
             </div>
 
-            <!-- ===== FOOTER ===== -->
-            <div style="background-color:#FFFFFF; padding:20px 30px; text-align:center; border-top:2px solid #2E86AB; margin-top:20px;">
+           <!-- ===== FOOTER ===== -->
+            <div style="background-color:#2E86AB; padding:20px 30px; text-align:center; margin-top:20px; color:#FFFFFF;">
               <div style="margin-bottom:8px;">
-                <p style="margin:0; font-size:15px; color:#000000;">
-                  Thank you for your business! Contact: <span t-esc="o.company_id.email or 'info@company.com'"/> | <span t-esc="o.company_id.phone or '+966 12 345 6789'"/>
+                <p style="margin:0; font-size:15px; color:#FFFFFF;">
+                  Thank you for your business! Contact:
+                  <span t-esc="o.company_id.email or 'info@company.com'"/> |
+                  <span t-esc="o.company_id.phone or '+966 12 345 6789'"/>
                 </p>
               </div>
-              <div style="direction:rtl;">
-                <p style="margin:0; font-size:15px; color:#000000;">
-                  شكراً لتعاملكم! <span t-esc="o.company_id.email or 'info@company.com'"/> | <span t-esc="o.company_id.phone or '+966 12 345 6789'"/> :اتصال
+              <div style="direction:rtl; text-align:center;">
+                <p style="margin:0; font-size:15px; color:#FFFFFF;">
+                  شكراً لتعاملكم! 
+                  <span t-esc="o.company_id.email or 'info@company.com'"/> |
+                  <span t-esc="o.company_id.phone or '+966 12 345 6789'"/> :اتصال
                 </p>
               </div>
             </div>
