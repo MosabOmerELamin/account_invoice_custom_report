@@ -17,8 +17,9 @@
                     <table style="width:100%;">
                       <tr>
                         <td style="width:80px;">
-                          <img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
-                               style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;" alt="Company Logo"/>
+<img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
+     style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;" alt="Company Logo"/>
+
                         </td>
                         <td style="padding-left:10px; vertical-align:top;">
                           <h2 style="margin:0; font-size:22px;" t-esc="o.company_id.name"/>
