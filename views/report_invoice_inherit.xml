@@ -34,27 +34,41 @@
                   </p>
                 </td>
               </tr>
-            </table>
+            </table><!-- ===== COMPANY INFO TABLE (EN & AR) ===== -->
+            
+          <table style="width:100%; border-collapse:collapse; margin-top:20px;">
+            <!-- Header Row -->
+            <tr>
+              <td style="color:white; font-size:15px; font-weight:bold; padding:5px 0;">
+                Company Information
+              </td>
+              <td style="color:white; font-size:15px; font-weight:bold; text-align:right; padding:5px 0;">
+                معلومات الشركة
+              </td>
+            </tr>
           
-            <!-- ===== COMPANY INFO TABLE (EN & AR) ===== -->
-            <table style="width:100%; margin-top:20px; border-collapse:collapse; border-bottom:1px solid white;">
-              <tr>
-                <!-- English Info -->
-                <td style="color:white; font-size:15px; padding:5px 0;">
-                  <strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
-                  <strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
-                  <strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/>
-                </td>
+            <!-- White Border Row -->
+            <tr>
+              <td colspan="2" style="border-bottom:1px solid white; padding:0; margin:0;"></td>
+            </tr>
           
-                <!-- Arabic Info -->
-                <td style="color:white; font-size:15px; text-align:right; padding:5px 0;">
-                  <strong>السجل التجاري:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
-                  <strong>الرقم الضريبي:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
-                  <strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/>
-                </td>
-              </tr>
-            </table>
-          </div>
+            <!-- Data Row -->
+            <tr>
+              <!-- English Info -->
+              <td style="color:white; font-size:15px; padding:5px 0;">
+                <strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
+                <strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
+                <strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/>
+              </td>
+          
+              <!-- Arabic Info -->
+              <td style="color:white; font-size:15px; text-align:right; padding:5px 0;">
+                <strong>السجل التجاري:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
+                <strong>الرقم الضريبي:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
+                <strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/>
+              </td>
+            </tr>
+          </table>
 
             <!-- ===== LINE ITEMS ===== -->
             <div style="padding:20px;">
