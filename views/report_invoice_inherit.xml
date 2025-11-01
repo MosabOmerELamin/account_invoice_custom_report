@@ -4,7 +4,7 @@
       <t t-set="data_report_margin_top" t-value="25"/>
       <t t-set="data_report_header_spacing" t-value="20"/>
 
-      <t t-call="web.external_layout">
+      <!-- <t t-call="web.external_layout"> -->
         <t t-foreach="docs" t-as="o">
 
           <div class="page" style="font-family:'Arial'; font-size:14px; color:#000; margin-top:0 !important; padding-top:0 !important;">
@@ -133,7 +133,7 @@
 
           </div>
         </t>
-      </t>
+      <!-- </t> -->
     </xpath>
   </template>
 </odoo>
