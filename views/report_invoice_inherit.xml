@@ -93,16 +93,15 @@
             <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
           </div>
 
-          <div class="footer" style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; margin-top:25px; border-top:3px solid #1e2a38; font-size:14px; line-height:1.6;">
-            
-            <div style="direction:ltr; text-align:center; margin-bottom:5px;">
+        <footer>
+          <div style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; font-size:14px; line-height:1.6;">
+            <div style="direction:ltr; margin-bottom:5px;">
               <p style="margin:0; font-weight:500;">
                 Thank you for your business! Contact:
                 <span t-esc="o.company_id.email or 'mosab@gmail.com'"/> |
                 <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
               </p>
             </div>
-
             <div style="direction:rtl; text-align:center; font-weight:500;">
               <p style="margin:0;">
                 شكراً لتعاملكم معنا، للاتصال:
@@ -110,18 +109,11 @@
                 <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
               </p>
             </div>
-          </div>
-
-        </div>
-        <div t-attf-class="footer o_company_#{company.id}_layout {{report_type != 'pdf' and 'mt-auto'}}">
-            <div class="o_footer_content d-flex border-top pt-2">
-                <div class="flex-grow-1 text-start me-2" t-field="company.report_footer"/>
-                <div class="text-end text-muted">
-                    <div t-if="report_type == 'pdf' and display_name_in_footer" t-out="o.name">(document name)</div>
-                    <div t-if="report_type == 'pdf'" class="text-nowrap">Page <span class="page"/> / <span class="topage"/></div>
-                </div>
+            <div style="text-align:right; font-size:12px; margin-top:5px;">
+              Page <span class="page"/> / <span class="topage"/>
             </div>
-        </div>
+          </div>
+        </footer>
       </t>
     </t>
     </t>
