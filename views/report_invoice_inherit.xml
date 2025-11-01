@@ -33,7 +33,7 @@
                   <td style="width:40%; text-align:right; vertical-align:top;">
                     <h3 style="margin:0; font-size:22px;">فاتورة / Invoice</h3>
                     <p style="margin:5px 0 0 0; font-size:16px;">
-                      INV-<span t-esc="o.name"/> / الفاتورة رقم <span t-esc="o.name"/>
+                      <span t-esc="o.name"/> / الفاتورة رقم <span t-esc="o.name"/>
                     </p>
                   </td>
                 </tr>
