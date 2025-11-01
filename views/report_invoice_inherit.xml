@@ -26,7 +26,7 @@
 
                 <!-- RIGHT SIDE (Arabic Company Name) -->
                 <div style="text-align:right; flex:1;">
-                  <h2 style="margin:0; font-size:22px;" t-esc="o.company_id.name_arabic or 'اسم الشركة بالعربية'"/>
+                  <h2 style="margin:0; font-size:22px;" t-esc="o.شركة التجارة العالمية"/>
                 </div>
               </div>
 
