@@ -38,93 +38,12 @@
             </div>
 
             <!-- ===== COMPANY INFO SECTION ===== -->
-            <div style="width:100%; margin-top:20px; display:flex; justify-content:space-between; background-color:#f0f8ff; padding:10px 20px; border-radius:6px;">
+            <div style="width:100%; margin-top:20px; display:flex; justify-content:space-between; gap:10px;">
 
-              <!-- ===== LEFT TABLE (English) ===== -->
-              <table style="width:48%; border-collapse:collapse;">
-                <!-- Header -->
-                <tr>
-                  <td style="font-size:15px; font-weight:bold; color:#000; padding-bottom:5px;">
-                    Company Information
-                  </td>
-                </tr>
-                <!-- White Border -->
-                <tr>
-                  <td style="border-bottom:2px solid white; padding:0; margin:0;"></td>
-                </tr>
-                <!-- Data -->
-                <tr>
-                  <td style="font-size:14px; color:#000; padding-top:5px;">
-                    <strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
-                    <strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
-                    <strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/>
-                  </td>
-                </tr>
-              </table>
-
-              <!-- ===== RIGHT TABLE (Arabic) ===== -->
-              <table style="width:48%; border-collapse:collapse;">
-                <!-- Header -->
-                <tr>
-                  <td style="font-size:15px; font-weight:bold; color:#000; text-align:right; padding-bottom:5px;">
-                    معلومات الشركة
-                  </td>
-                </tr>
-                <!-- White Border -->
-                <tr>
-                  <td style="border-bottom:2px solid white; padding:0; margin:0;"></td>
-                </tr>
-                <!-- Data -->
-                <tr>
-                  <td style="font-size:14px; color:#000; text-align:right; padding-top:5px;">
-                    <strong>السجل التجاري:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
-                    <strong>الرقم الضريبي:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
-                    <strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/>
-                  </td>
-                </tr>
-              </table>
-
-            </div>
-
-            <!-- ===== LINE ITEMS ===== -->
-            <div style="padding:20px;">
-              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:15px;">
-                <thead style="background:#213a5c; color:white;">
+              <!-- ===== LEFT DIV (English) ===== -->
+              <div style="width:48%; background-color:#213a5c; color:white; padding:10px; border-radius:6px;">
+                <h4 style="margin:0; font-size:15px; font-weight:bold;">Company Information</h4>
+                <div style="border-bottom:2px solid white; margin:5px 0;"></div>
+                <table style="width:100%; border-collapse:collapse; color:white; font-size:14px;">
                   <tr>
-                    <th style="padding:8px; text-align:left;">Description</th>
-                    <th style="padding:8px; text-align:center;">Qty</th>
-                    <th style="padding:8px; text-align:center;">Unit Price</th>
-                    <th style="padding:8px; text-align:right;">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <t t-foreach="o.invoice_line_ids" t-as="line">
-                    <tr>
-                      <td style="padding:8px;"><span t-esc="line.name"/></td>
-                      <td style="padding:8px; text-align:center;"><span t-esc="line.quantity"/></td>
-                      <td style="padding:8px; text-align:center;"><span t-esc="line.price_unit"/></td>
-                      <td style="padding:8px; text-align:right;"><span t-esc="line.price_subtotal"/></td>
-                    </tr>
-                  </t>
-                </tbody>
-              </table>
-            </div>
-
-            <!-- ===== TOTALS ===== -->
-            <div style="padding:10px 25px; text-align:right; font-size:16px;">
-              <p><strong>Subtotal:</strong> <span t-esc="o.amount_untaxed"/></p>
-              <p><strong>Tax:</strong> <span t-esc="o.amount_tax"/></p>
-              <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
-            </div>
-
-            <!-- ===== FOOTER ===== -->
-            <div style="background-color:#1e2b35; color:white; padding:10px 20px; text-align:center; font-size:15px; border-radius:0 0 8px 8px;">
-              <p style="margin:0;">Thank you for your business | شكراً لتعاملكم معنا</p>
-            </div>
-
-          </div>
-        </t>
-      </t>
-    </xpath>
-  </template>
-</odoo>
+                    <td>
