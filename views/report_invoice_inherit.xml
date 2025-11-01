@@ -1,55 +1,45 @@
 <odoo>
-  <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
-    <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+  <template id="report_invoice_custom_document">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
 
-      <t t-call="web.internal_layout">
-        <style>
-        @page { margin: 3mm 8mm 10mm 8mm !important; }
-        .page { margin-top: 0 !important; padding-top: 0 !important; }
-        /* hide any stubborn header/footer classes */
-        .header, .footer { display: none !important; }
-      </style>
-        <t t-foreach="docs" t-as="o">
+        <div class="page" style="font-family:'Arial'; font-size:14px; color:#000; margin:0; padding:0;">
+          
+          <!-- ===== HEADER SECTION ===== -->
+          <div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 0 0;">
+            <table style="width:100%; border-collapse:collapse;">
+              <tr valign="top">
+                <!-- LEFT: LOGO + COMPANY NAME -->
+                <td style="width:60%; vertical-align:top;">
+                  <table style="width:100%; border-collapse:collapse;">
+                    <tr>
+                      <td style="width:80px; vertical-align:top;">
+                        <img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
+                             style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;"
+                             alt="Company Logo"/>
+                      </td>
+                      <td style="padding-left:10px; vertical-align:top;">
+                        <h2 style="margin:0; font-size:22px;" t-esc="o.company_id.name"/>
+                        <p style="margin:0; font-size:20px;">شركة التجارة العالمية</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
 
-          <div class="page" style="font-family:'Arial'; font-size:14px; color:#000; margin-top:0 !important; padding-top:0 !important;">
+                <!-- RIGHT: INVOICE INFO -->
+                <td style="width:40%; text-align:right; vertical-align:top;">
+                  <h3 style="margin:0; font-size:22px;">فاتورة / Invoice</h3>
+                  <p style="margin:5px 0 0 0; font-size:16px;">
+                    <span t-esc="o.name"/> / الفاتورة رقم <span t-esc="o.name"/>
+                  </p>
+                </td>
+              </tr>
+            </table>
 
-            <!-- ===== HEADER SECTION ===== -->
-            <div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 0 0;">
-
-              <!-- Logo + Invoice Info -->
-              <table style="width:100%; border-collapse:collapse;">
-                <tr valign="top">
-                  <!-- LEFT SIDE: LOGO + COMPANY NAMES -->
-                  <td style="width:60%; vertical-align:top;">
-                    <table style="width:100%; border-collapse:collapse;">
-                      <tr>
-                        <td style="width:80px; vertical-align:top;">
-                          <img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
-                               style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;" 
-                               alt="Company Logo"/>
-                        </td>
-                        <td style="padding-left:10px; vertical-align:top;">
-                          <h2 style="margin:0; font-size:22px;" t-esc="o.company_id.name"/>
-                          <p style="margin:0; font-size:20px;">شركة التجارة العالمية</p>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-
-                  <!-- RIGHT SIDE: INVOICE INFO -->
-                  <td style="width:40%; text-align:right; vertical-align:top;">
-                    <h3 style="margin:0; font-size:22px;">فاتورة / Invoice</h3>
-                    <p style="margin:5px 0 0 0; font-size:16px;">
-                      <span t-esc="o.name"/> / الفاتورة رقم <span t-esc="o.name"/>
-                    </p>
-                  </td>
-                </tr>
-              </table>
-
-              <!-- Company Info Side by Side using TABLE (reliable in PDF) -->
+            <!-- Company Info (side-by-side) -->
             <table style="width:100%; border-collapse:collapse; margin-top:20px; table-layout:fixed;">
               <tr>
-                <!-- LEFT (English) -->
+                <!-- English -->
                 <td style="width:49%; padding-right:5px; vertical-align:top;">
                   <div style="background-color:#4e5f79; padding:10px; border-radius:6px;">
                     <h4 style="margin:0; font-size:15px; font-weight:bold; color:white;">Company Information</h4>
@@ -61,13 +51,13 @@
                     </p>
                   </div>
                 </td>
-            
-                <!-- RIGHT (Arabic) -->
+
+                <!-- Arabic -->
                 <td style="width:49%; padding-left:5px; vertical-align:top;">
                   <div style="background-color:#4e5f79; padding:10px; border-radius:6px; text-align:right;">
                     <h4 style="margin:0; font-size:15px; font-weight:bold; color:white;">معلومات الشركة</h4>
                     <div style="border-bottom:2px solid white; margin:5px 0;"></div>
-                    <p style="margin:0; color:white; font-size:14px;">
+                    <p style="margin:0; color:white; font-size:14px;" dir="rtl">
                       <strong>السجل التجاري:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/><br/>
                       <strong>الرقم الضريبي:</strong> <span t-esc="o.company_id.vat or ''"/><br/><br/>
                       <strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/>
@@ -76,44 +66,42 @@
                 </td>
               </tr>
             </table>
+          </div>
 
-            </div>
-
-            <!-- ===== LINE ITEMS ===== -->
-            <div style="padding:20px;">
-              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:15px;">
-                <thead style="background:#213a5c; color:white;">
+          <!-- ===== INVOICE LINES ===== -->
+          <div style="padding:20px;">
+            <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:15px;">
+              <thead style="background:#213a5c; color:white;">
+                <tr>
+                  <th style="padding:8px; text-align:left;">Description</th>
+                  <th style="padding:8px; text-align:center;">Qty</th>
+                  <th style="padding:8px; text-align:center;">Unit Price</th>
+                  <th style="padding:8px; text-align:right;">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <t t-foreach="o.invoice_line_ids" t-as="line">
                   <tr>
-                    <th style="padding:8px; text-align:left;">Description</th>
-                    <th style="padding:8px; text-align:center;">Qty</th>
-                    <th style="padding:8px; text-align:center;">Unit Price</th>
-                    <th style="padding:8px; text-align:right;">Amount</th>
+                    <td style="padding:8px;"><span t-esc="line.name"/></td>
+                    <td style="padding:8px; text-align:center;"><span t-esc="line.quantity"/></td>
+                    <td style="padding:8px; text-align:center;"><span t-esc="line.price_unit"/></td>
+                    <td style="padding:8px; text-align:right;"><span t-esc="line.price_subtotal"/></td>
                   </tr>
-                </thead>
-                <tbody>
-                  <t t-foreach="o.invoice_line_ids" t-as="line">
-                    <tr>
-                      <td style="padding:8px;"><span t-esc="line.name"/></td>
-                      <td style="padding:8px; text-align:center;"><span t-esc="line.quantity"/></td>
-                      <td style="padding:8px; text-align:center;"><span t-esc="line.price_unit"/></td>
-                      <td style="padding:8px; text-align:right;"><span t-esc="line.price_subtotal"/></td>
-                    </tr>
-                  </t>
-                </tbody>
-              </table>
-            </div>
+                </t>
+              </tbody>
+            </table>
+          </div>
 
-            <!-- ===== TOTALS ===== -->
-            <div style="padding:10px 25px; text-align:right; font-size:16px;">
-              <p><strong>Subtotal:</strong> <span t-esc="o.amount_untaxed"/></p>
-              <p><strong>Tax:</strong> <span t-esc="o.amount_tax"/></p>
-              <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
-            </div>
+          <!-- ===== TOTALS ===== -->
+          <div style="padding:10px 25px; text-align:right; font-size:16px;">
+            <p><strong>Subtotal:</strong> <span t-esc="o.amount_untaxed"/></p>
+            <p><strong>Tax:</strong> <span t-esc="o.amount_tax"/></p>
+            <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
+          </div>
 
           <!-- ===== FOOTER ===== -->
           <div style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; margin-top:25px; border-top:3px solid #1e2a38; font-size:14px; line-height:1.6;">
-          
-            <!-- English -->
+            
             <div style="direction:ltr; text-align:center; margin-bottom:5px;">
               <p style="margin:0; font-weight:500;">
                 Thank you for your business! Contact:
@@ -121,23 +109,18 @@
                 <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
               </p>
             </div>
-          
-            <!-- Arabic -->
+
             <div style="direction:rtl; text-align:center; font-weight:500;">
               <p style="margin:0;">
-                  شكرا لتعاملكم معنا للاتصال 
-                  :
+                شكراً لتعاملكم معنا، للاتصال:
                 <span t-esc="o.company_id.email or 'mosab@gmail.com'"/> |
-                <span t-esc="o.company_id.phone or '+1 555-555-5556'"/> 
+                <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
               </p>
             </div>
-          
           </div>
-
-
-          </div>
-        </t>
+        </div>
       </t>
-    </xpath>
+    </t>
   </template>
+
 </odoo>
