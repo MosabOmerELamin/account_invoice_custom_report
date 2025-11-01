@@ -10,12 +10,7 @@
     "data": [
         "views/report_invoice_inherit.xml",
     ],
-    "assets": {
-        "web.assets_common": [
-            "account_invoice_custom_report/static/src/scss/invoice_custom.scss",
-        ],
-        "web.assets_qweb": [],
-    },
+
     "installable": True,
     "application": True,
 }
