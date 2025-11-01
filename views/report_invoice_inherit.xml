@@ -3,7 +3,6 @@
     <xpath expr="//t[@t-call='web.external_layout']" position="replace">
       <t t-call="web.external_layout">
         <t t-foreach="docs" t-as="o">
-
           <div class="page" style="font-family:'Arial'; font-size:14px; color:#000;">
 
             <!-- ===== HEADER SECTION ===== -->
@@ -14,12 +13,12 @@
                 <tr valign="top">
                   <!-- LEFT SIDE: LOGO + COMPANY NAMES -->
                   <td style="width:60%; vertical-align:top;">
-                    <table style="width:100%;">
+                    <table style="width:100%; border-collapse:collapse;">
                       <tr>
-                        <td style="width:80px;">
-<img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
-     style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;" alt="Company Logo"/>
-
+                        <td style="width:80px; vertical-align:top;">
+                          <img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
+                               style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;" 
+                               alt="Company Logo"/>
                         </td>
                         <td style="padding-left:10px; vertical-align:top;">
                           <h2 style="margin:0; font-size:22px;" t-esc="o.company_id.name"/>
@@ -84,4 +83,28 @@
                       <td style="padding:8px;"><span t-esc="line.name"/></td>
                       <td style="padding:8px; text-align:center;"><span t-esc="line.quantity"/></td>
                       <td style="padding:8px; text-align:center;"><span t-esc="line.price_unit"/></td>
-                      <td style="padding:8p
+                      <td style="padding:8px; text-align:right;"><span t-esc="line.price_subtotal"/></td>
+                    </tr>
+                  </t>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- ===== TOTALS ===== -->
+            <div style="padding:10px 25px; text-align:right; font-size:16px;">
+              <p><strong>Subtotal:</strong> <span t-esc="o.amount_untaxed"/></p>
+              <p><strong>Tax:</strong> <span t-esc="o.amount_tax"/></p>
+              <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
+            </div>
+
+            <!-- ===== FOOTER ===== -->
+            <div style="background-color:#1e2b35; color:white; padding:10px 20px; text-align:center; font-size:15px; border-radius:0 0 8px 8px;">
+              <p style="margin:0;">Thank you for your business | شكراً لتعاملكم معنا</p>
+            </div>
+
+          </div>
+        </t>
+      </t>
+    </xpath>
+  </template>
+</odoo>
