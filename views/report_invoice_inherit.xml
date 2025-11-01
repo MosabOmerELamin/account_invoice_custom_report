@@ -7,11 +7,9 @@
 
         <div class="page" style="font-family:'Arial'; font-size:14px; color:#000; margin:0; padding:0;">
           
-          <!-- ===== HEADER SECTION ===== -->
           <div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 0 0;">
             <table style="width:100%; border-collapse:collapse;">
               <tr valign="top">
-                <!-- LEFT: LOGO + COMPANY NAME -->
                 <td style="width:60%; vertical-align:top;">
                   <table style="width:100%; border-collapse:collapse;">
                     <tr>
@@ -28,7 +26,6 @@
                   </table>
                 </td>
 
-                <!-- RIGHT: INVOICE INFO -->
                 <td style="width:40%; text-align:right; vertical-align:top;">
                   <h3 style="margin:0; font-size:22px;">فاتورة / Invoice</h3>
                   <p style="margin:5px 0 0 0; font-size:16px;">
@@ -38,10 +35,8 @@
               </tr>
             </table>
 
-            <!-- Company Info (side-by-side) -->
             <table style="width:100%; border-collapse:collapse; margin-top:20px; table-layout:fixed;">
               <tr>
-                <!-- English -->
                 <td style="width:49%; padding-right:5px; vertical-align:top;">
                   <div style="background-color:#4e5f79; padding:10px; border-radius:6px;">
                     <h4 style="margin:0; font-size:15px; font-weight:bold; color:white;">Company Information</h4>
@@ -54,7 +49,6 @@
                   </div>
                 </td>
 
-                <!-- Arabic -->
                 <td style="width:49%; padding-left:5px; vertical-align:top;">
                   <div style="background-color:#4e5f79; padding:10px; border-radius:6px; text-align:right;">
                     <h4 style="margin:0; font-size:15px; font-weight:bold; color:white;">معلومات الشركة</h4>
@@ -70,7 +64,6 @@
             </table>
           </div>
 
-          <!-- ===== INVOICE LINES ===== -->
           <div style="padding:20px;">
             <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:15px;">
               <thead style="background:#213a5c; color:white;">
@@ -94,14 +87,12 @@
             </table>
           </div>
 
-          <!-- ===== TOTALS ===== -->
           <div style="padding:10px 25px; text-align:right; font-size:16px;">
             <p><strong>Subtotal:</strong> <span t-esc="o.amount_untaxed"/></p>
             <p><strong>Tax:</strong> <span t-esc="o.amount_tax"/></p>
             <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
           </div>
 
-          <!-- ===== FOOTER ===== -->
           <div style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; margin-top:25px; border-top:3px solid #1e2a38; font-size:14px; line-height:1.6;">
             
             <div style="direction:ltr; text-align:center; margin-bottom:5px;">
