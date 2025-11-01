@@ -35,41 +35,55 @@
                   </td>
                 </tr>
               </table>
+            </div>
 
-              <!-- ===== COMPANY INFO TABLE (EN & AR) ===== -->
-              <table style="width:100%; border-collapse:collapse; margin-top:20px;">
-                <!-- Header Row -->
+            <!-- ===== COMPANY INFO SECTION ===== -->
+            <div style="width:100%; margin-top:20px; display:flex; justify-content:space-between; background-color:#f0f8ff; padding:10px 20px; border-radius:6px;">
+
+              <!-- ===== LEFT TABLE (English) ===== -->
+              <table style="width:48%; border-collapse:collapse;">
+                <!-- Header -->
                 <tr>
-                  <td style="color:white; font-size:15px; font-weight:bold; padding:5px 0;">
+                  <td style="font-size:15px; font-weight:bold; color:#000; padding-bottom:5px;">
                     Company Information
                   </td>
-                  <td style="color:white; font-size:15px; font-weight:bold; text-align:right; padding:5px 0;">
-                    معلومات الشركة
-                  </td>
                 </tr>
-
-                <!-- White Border Row -->
+                <!-- White Border -->
                 <tr>
-                  <td colspan="2" style="border-bottom:1px solid white; padding:0; margin:0;"></td>
+                  <td style="border-bottom:2px solid white; padding:0; margin:0;"></td>
                 </tr>
-
-                <!-- Data Row -->
+                <!-- Data -->
                 <tr>
-                  <!-- English Info -->
-                  <td style="color:white; font-size:15px; padding:5px 0;">
+                  <td style="font-size:14px; color:#000; padding-top:5px;">
                     <strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
                     <strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
                     <strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/>
                   </td>
+                </tr>
+              </table>
 
-                  <!-- Arabic Info -->
-                  <td style="color:white; font-size:15px; text-align:right; padding:5px 0;">
+              <!-- ===== RIGHT TABLE (Arabic) ===== -->
+              <table style="width:48%; border-collapse:collapse;">
+                <!-- Header -->
+                <tr>
+                  <td style="font-size:15px; font-weight:bold; color:#000; text-align:right; padding-bottom:5px;">
+                    معلومات الشركة
+                  </td>
+                </tr>
+                <!-- White Border -->
+                <tr>
+                  <td style="border-bottom:2px solid white; padding:0; margin:0;"></td>
+                </tr>
+                <!-- Data -->
+                <tr>
+                  <td style="font-size:14px; color:#000; text-align:right; padding-top:5px;">
                     <strong>السجل التجاري:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
                     <strong>الرقم الضريبي:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
                     <strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/>
                   </td>
                 </tr>
               </table>
+
             </div>
 
             <!-- ===== LINE ITEMS ===== -->
