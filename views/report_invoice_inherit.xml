@@ -48,8 +48,8 @@
                     <h4 style="margin:0; font-size:15px; font-weight:bold; color:white;">Company Information</h4>
                     <div style="border-bottom:2px solid white; margin:5px 0;"></div>
                     <p style="margin:0 0 6px 0; color:white; font-size:14px;">
-                      <strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
-                      <strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
+                      <strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/><br/>
+                      <strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/><br/><br/>
                       <strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/>
                     </p>
                   </div>
