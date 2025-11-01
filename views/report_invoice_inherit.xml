@@ -1,54 +1,86 @@
-<div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 0 0;">
-  <!-- Logo + Company Name -->
-  <table style="width:100%; border-collapse:collapse;">
-    <tr>
-      <td style="width:60%; vertical-align:top;">
-        <table style="width:100%;">
-          <tr>
-            <td style="width:80px;">
-              <img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
-                   style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;"/>
-            </td>
-            <td style="padding-left:10px;">
-              <h2 style="margin:0;" t-esc="o.company_id.name"/>
-              <p style="margin:0;">شركة التجارة العالمية</p>
-            </td>
-          </tr>
-        </table>
-      </td>
-      <td style="width:40%; text-align:right;">
-        <h3 style="margin:0;">فاتورة / Invoice</h3>
-        <p style="margin:5px 0 0 0;">
-          INV-<span t-esc="o.name"/> / الفاتورة رقم <span t-esc="o.name"/>
-        </p>
-      </td>
-    </tr>
-  </table>
+<odoo>
+  <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
+    <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+      <t t-call="web.external_layout">
+        <t t-foreach="docs" t-as="o">
 
-  <!-- Company Info Side by Side -->
-  <div style="display:flex; flex-wrap:nowrap; justify-content:space-between; margin-top:20px; gap:10px;">
-    
-    <!-- LEFT (English) -->
-    <div style="width:49%; background-color:#1e3d59; padding:10px; border-radius:6px;">
-      <h4 style="margin:0; font-weight:bold;">Company Information</h4>
-      <div style="border-bottom:2px solid white; margin:5px 0;"></div>
-      <p style="margin:0;">
-        <strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
-        <strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
-        <strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/>
-      </p>
-    </div>
+          <div class="page" style="font-family:'Arial'; font-size:14px; color:#000;">
 
-    <!-- RIGHT (Arabic) -->
-    <div style="width:49%; background-color:#34495e; padding:10px; border-radius:6px; text-align:right;">
-      <h4 style="margin:0; font-weight:bold;">معلومات الشركة</h4>
-      <div style="border-bottom:2px solid white; margin:5px 0;"></div>
-      <p style="margin:0;">
-        <strong>السجل التجاري:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
-        <strong>الرقم الضريبي:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
-        <strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/>
-      </p>
-    </div>
+            <!-- ===== HEADER SECTION ===== -->
+            <div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 0 0;">
 
-  </div>
-</div>
+              <!-- Logo + Invoice Info -->
+              <table style="width:100%; border-collapse:collapse;">
+                <tr valign="top">
+                  <!-- LEFT SIDE: LOGO + COMPANY NAMES -->
+                  <td style="width:60%; vertical-align:top;">
+                    <table style="width:100%;">
+                      <tr>
+                        <td style="width:80px;">
+                          <img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
+                               style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;" alt="Company Logo"/>
+                        </td>
+                        <td style="padding-left:10px; vertical-align:top;">
+                          <h2 style="margin:0; font-size:22px;" t-esc="o.company_id.name"/>
+                          <p style="margin:0; font-size:20px;">شركة التجارة العالمية</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+
+                  <!-- RIGHT SIDE: INVOICE INFO -->
+                  <td style="width:40%; text-align:right; vertical-align:top;">
+                    <h3 style="margin:0; font-size:22px;">فاتورة / Invoice</h3>
+                    <p style="margin:5px 0 0 0; font-size:16px;">
+                      INV-<span t-esc="o.name"/> / الفاتورة رقم <span t-esc="o.name"/>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Company Info Side by Side -->
+              <div style="display:flex; flex-wrap:nowrap; justify-content:space-between; margin-top:20px; gap:10px;">
+
+                <!-- LEFT (English) -->
+                <div style="width:49%; background-color:#1e3d59; padding:10px; border-radius:6px;">
+                  <h4 style="margin:0; font-size:15px; font-weight:bold; color:white;">Company Information</h4>
+                  <div style="border-bottom:2px solid white; margin:5px 0;"></div>
+                  <p style="margin:0; color:white; font-size:14px;">
+                    <strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
+                    <strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
+                    <strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/>
+                  </p>
+                </div>
+
+                <!-- RIGHT (Arabic) -->
+                <div style="width:49%; background-color:#34495e; padding:10px; border-radius:6px; text-align:right;">
+                  <h4 style="margin:0; font-size:15px; font-weight:bold; color:white;">معلومات الشركة</h4>
+                  <div style="border-bottom:2px solid white; margin:5px 0;"></div>
+                  <p style="margin:0; color:white; font-size:14px;">
+                    <strong>السجل التجاري:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/>
+                    <strong>الرقم الضريبي:</strong> <span t-esc="o.company_id.vat or ''"/><br/>
+                    <strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/>
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ===== LINE ITEMS ===== -->
+            <div style="padding:20px;">
+              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:15px;">
+                <thead style="background:#213a5c; color:white;">
+                  <tr>
+                    <th style="padding:8px; text-align:left;">Description</th>
+                    <th style="padding:8px; text-align:center;">Qty</th>
+                    <th style="padding:8px; text-align:center;">Unit Price</th>
+                    <th style="padding:8px; text-align:right;">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <t t-foreach="o.invoice_line_ids" t-as="line">
+                    <tr>
+                      <td style="padding:8px;"><span t-esc="line.name"/></td>
+                      <td style="padding:8px; text-align:center;"><span t-esc="line.quantity"/></td>
+                      <td style="padding:8px; text-align:center;"><span t-esc="line.price_unit"/></td>
+                      <td style="padding:8p
