@@ -73,9 +73,9 @@
 
             <!-- Totals -->
             <div style="padding:10px 20px; text-align:right;">
-              <p><strong>Subtotal:</strong> <t t-field="o.amount_untaxed"/></p>
-              <p><strong>Tax:</strong> <t t-field="o.amount_tax"/></p>
-              <h3><strong>Total:</strong> <t t-field="o.amount_total"/></h3>
+              <p><strong>Subtotal:</strong> <t t-esc="o.amount_untaxed"/></p>
+              <p><strong>Tax:</strong> <t t-esc="o.amount_tax"/></p>
+              <h3><strong>Total:</strong> <t t-esc="o.amount_total"/></h3>
             </div>
 
             <!-- Footer -->
