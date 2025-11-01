@@ -8,6 +8,7 @@
     "license": "LGPL-3",
     "depends": ["account", "web"],
     "data": [
+        "views/action_report_invoice_bilingual.xml",
         "views/report_invoice_inherit.xml",
     ],
 
