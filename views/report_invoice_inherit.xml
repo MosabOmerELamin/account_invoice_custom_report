@@ -93,27 +93,25 @@
             <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
           </div>
 
-        <footer>
-          <div style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; font-size:14px; line-height:1.6;">
-            <div style="direction:ltr; margin-bottom:5px;">
-              <p style="margin:0; font-weight:500;">
-                Thank you for your business! Contact:
-                <span t-esc="o.company_id.email or 'mosab@gmail.com'"/> |
-                <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
-              </p>
+            <div style="position: absolute; bottom: 0; left: 0; width: 100%; background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; font-size:14px;">
+              <div style="direction:ltr; text-align:center; margin-bottom:5px;">
+                <p style="margin:0; font-weight:500;">
+                  Thank you for your business! Contact:
+                  <span t-esc="o.company_id.email or 'mosab@gmail.com'"/> |
+                  <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
+                </p>
+              </div>
+              <div style="direction:rtl; text-align:center; font-weight:500;">
+                <p style="margin:0;">
+                  شكراً لتعاملكم معنا، للاتصال:
+                  <span t-esc="o.company_id.email or 'mosab@gmail.com'"/> |
+                  <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
+                </p>
+              </div>
+              <div style="position:absolute; bottom:5px; right:10px; font-size:12px; color:#ccc;">
+                Page <span class="page"/> / <span class="topage"/>
+              </div>
             </div>
-            <div style="direction:rtl; text-align:center; font-weight:500;">
-              <p style="margin:0;">
-                شكراً لتعاملكم معنا، للاتصال:
-                <span t-esc="o.company_id.email or 'mosab@gmail.com'"/> |
-                <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
-              </p>
-            </div>
-            <div style="text-align:right; font-size:12px; margin-top:5px;">
-              Page <span class="page"/> / <span class="topage"/>
-            </div>
-          </div>
-        </footer>
       </t>
     </t>
     </t>
