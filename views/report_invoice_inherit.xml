@@ -92,6 +92,7 @@
             <p><strong>Tax:</strong> <span t-esc="o.amount_tax"/></p>
             <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
           </div>
+        <footer>
 
           <div style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; margin-top:25px; border-top:3px solid #1e2a38; font-size:14px; line-height:1.6;">
             
@@ -111,6 +112,8 @@
               </p>
             </div>
           </div>
+
+        </footer>
         </div>
       </t>
     </t>
