@@ -8,38 +8,37 @@
 
             <!-- ===== HEADER SECTION ===== -->
             <div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 0 0;">
-
+            
               <!-- ===== ONE ROW: Left (Logo + Company) | Right (Invoice Info) ===== -->
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            
                 <!-- LEFT SIDE (Logo + Company Names) -->
-                <div style="display:flex; align-items:center;">
+                <div style="display:flex; align-items:flex-start;">
                   <!-- LOGO -->
-                  <div style="height:70px; width:120px; background-color:white; border-radius:6px; text-align:center; line-height:70px; margin-right:15px;">
+                  <div style="margin-right:15px;">
                     <img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
-                         style="max-height:70px; max-width:120px;" alt="Company Logo"/>
+                         style="height:60px; width:auto; border-radius:6px; background:white; padding:5px;" alt="Company Logo"/>
                   </div>
-
+            
                   <!-- COMPANY NAMES -->
                   <div>
                     <h2 style="margin:0; font-size:22px;" t-esc="o.company_id.name"/>
                     <p style="margin:0; font-size:20px;">شركة التجارة العالمية</p>
                   </div>
                 </div>
-
+            
                 <!-- RIGHT SIDE (Invoice Info) -->
-                <div style="text-align:right;">
-                  <h3 style="margin:0; font-size:22px;">Invoice / فاتورة</h3>
+                <div style="text-align:right; margin-top:5px;">
+                  <h3 style="margin:0; font-size:22px;">فاتورة / Invoice</h3>
                   <p style="margin:5px 0 0 0; font-size:16px;">
-                    INV-<span t-esc="o.name"/> / رقم الفاتورة <span t-esc="o.name"/>
+                    <span>INV-<t t-esc="o.name"/> / الفاتورة رقم <t t-esc="o.name"/></span>
                   </p>
                 </div>
-
+            
               </div>
-
+            
               <!-- ===== COMPANY INFO TABLE (EN & AR) ===== -->
               <div style="display:flex; justify-content:space-between; margin-top:25px; border-bottom:1px solid white; padding-bottom:10px;">
-
                 <!-- LEFT SIDE (English Info) -->
                 <table style="color:white; font-size:15px;">
                   <tr>
@@ -55,7 +54,7 @@
                     <td><span t-esc="o.company_id.phone or ''"/></td>
                   </tr>
                 </table>
-
+            
                 <!-- RIGHT SIDE (Arabic Info) -->
                 <table style="color:white; font-size:15px; text-align:right;">
                   <tr>
