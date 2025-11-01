@@ -7,7 +7,7 @@
       <t t-call="web.external_layout">
         <t t-foreach="docs" t-as="o">
 
-          <div class="page" style="font-family:'Arial'; font-size:14px; color:#000; margin-top:0; padding-top:0;"">
+          <div class="page" style="font-family:'Arial'; font-size:14px; color:#000; margin-top:0; padding-top:0;">
 
             <!-- ===== HEADER SECTION ===== -->
             <div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 0 0;">
