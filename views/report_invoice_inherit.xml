@@ -1,102 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
-        
-        <!-- Replace the entire header section -->
-        <xpath expr="//div[hasclass('header')]" position="replace">
-            <div class="header" style="text-align: center; margin-bottom: 20px; padding-bottom: 15px;">
-                <h1 style="color: #2E86AB; margin: 0; font-size: 24px;">فاتورة / Invoice</h1>
-                <div style="display: flex; justify-content: space-between; margin-top: 10px; align-items: center;">
-                    <span style="font-weight: bold;">Invoice Number: <span t-field="o.name"/></span>
-                    <span style="direction: rtl; font-weight: bold;">فاتورة رقم: <span t-field="o.name"/></span>
-                </div>
-                <hr style="border-top: 2px solid #2E86AB; margin: 10px 0;"/>
-            </div>
-        </xpath>
+  <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
+    <xpath expr="." position="replace">
+      <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+          <div class="page" style="font-family: 'Arial'; border-radius:10px; overflow:hidden;">
 
-        <!-- Add bilingual company information at the beginning -->
-        <xpath expr="//div[hasclass('page')]" position="inside">
-            <!-- Company Information Section -->
-            <div class="row mb-4" style="border: 1px solid #e0e0e0; border-radius: 5px; padding: 15px; background-color: #f9f9f9; margin-bottom: 20px !important;">
-                <!-- English Company Info -->
-                <div class="col-6">
-                    <h3 style="color: #2E86AB; border-bottom: 1px solid #2E86AB; padding-bottom: 5px; margin-bottom: 10px;">Company Information</h3>
-                    <table style="width: 100%;">
-                        <tr>
-                            <td style="padding: 2px 5px; width: 30%;"><strong>CR No:</strong></td>
-                            <td style="padding: 2px 5px;"><span t-field="o.company_id.company_registry"/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 2px 5px;"><strong>VAT No:</strong></td>
-                            <td style="padding: 2px 5px;"><span t-field="o.company_id.vat"/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 2px 5px;"><strong>Tel:</strong></td>
-                            <td style="padding: 2px 5px;"><span t-field="o.company_id.phone"/></td>
-                        </tr>
-                    </table>
+            <!-- Header -->
+            <div style="background-color:#213a5c; color:white; padding:15px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="flex:1;">
+                  <h2 style="margin:0; font-size:22px;">Global Trading Co.</h2>
+                  <p style="margin:0; font-size:16px;">شركة التجارة العالمية</p>
                 </div>
-                
-                <!-- Arabic Company Info -->
-                <div class="col-6" style="direction: rtl; text-align: right;">
-                    <h3 style="color: #2E86AB; border-bottom: 1px solid #2E86AB; padding-bottom: 5px; margin-bottom: 10px;">معلومات الشركة</h3>
-                    <table style="width: 100%;">
-                        <tr>
-                            <td style="padding: 2px 5px; width: 30%;"><strong>هاتف:</strong></td>
-                            <td style="padding: 2px 5px;"><span t-field="o.company_id.phone"/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 2px 5px;"><strong>الرقم الضريبي:</strong></td>
-                            <td style="padding: 2px 5px;"><span t-field="o.company_id.vat"/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 2px 5px;"><strong>السجل التجاري:</strong></td>
-                            <td style="padding: 2px 5px;"><span t-field="o.company_id.company_registry"/></td>
-                        </tr>
-                    </table>
+                <div style="flex:1; text-align:right;">
+                  <h3 style="margin:0;">Invoice / فاتورة</h3>
+                  <p style="margin:0;">INV-<span t-esc="o.name"/></p>
                 </div>
+              </div>
             </div>
 
-            <!-- Invoice Content Header -->
-            <div class="row mb-3">
-                <div class="col-12">
-                    <h3 style="color: #2E86AB; margin-bottom: 5px;">Invoice Content Area</h3>
-                    <p style="color: #666; font-style: italic; margin-bottom: 15px;">Add your line items, totals, and other details here.</p>
-                </div>
-                <div class="col-12" style="direction: rtl; text-align: right;">
-                    <h3 style="color: #2E86AB; margin-bottom: 5px;">منطقة محتوى الفاتورة</h3>
-                    <p style="color: #666; font-style: italic; margin-bottom: 15px;">أضف بنودك وإجمالياتك وتفاصيل أخرى هنا.</p>
-                </div>
+            <!-- Company Info -->
+            <div style="display:flex; justify-content:space-between; background:#e8eef5; padding:8px 20px;">
+              <div>
+                <p><strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/></p>
+                <p><strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/></p>
+                <p><strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/></p>
+              </div>
+              <div style="text-align:right;">
+                <p><strong>السجل التجاري:</strong> <span t-esc="o.company_id.company_registry or ''"/></p>
+                <p><strong>الرقم الضريبي:</strong> <span t-esc="o.company_id.vat or ''"/></p>
+                <p><strong>هاتف:</strong> <span t-esc="o.company_id.phone or ''"/></p>
+              </div>
             </div>
-        </xpath>
 
-        <!-- Modify customer address display to be bilingual -->
-        <xpath expr="//div[hasclass('row')]//div[hasclass('col-6')]" position="attributes">
-            <attribute name="t-attf-class">col-6 #{o.partner_shipping_id and (o.partner_shipping_id != o.partner_id) and 'border-end' or ''}</attribute>
-        </xpath>
-
-        <!-- Add Arabic customer info -->
-        <xpath expr="//div[hasclass('row')]//div[hasclass('col-6')]" position="after">
-            <div class="col-6" style="direction: rtl; text-align: right;">
-                <strong class="d-block mt-3">العميل</strong>
-                <div t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
-                <div t-if="o.partner_id.vat">
-                    <strong>الرقم الضريبي:</strong> <span t-field="o.partner_id.vat"/>
-                </div>
+            <!-- Line Items -->
+            <div style="padding:10px 20px;">
+              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:14px;">
+                <thead style="background:#213a5c; color:white;">
+                  <tr>
+                    <th style="padding:8px; text-align:left;">Description</th>
+                    <th style="padding:8px; text-align:center;">Qty</th>
+                    <th style="padding:8px; text-align:center;">Unit Price</th>
+                    <th style="padding:8px; text-align:right;">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <t t-foreach="o.invoice_line_ids" t-as="line">
+                    <tr>
+                      <td style="padding:8px; vertical-align:top;"><span t-esc="line.name"/></td>
+                      <td style="padding:8px; text-align:center;"><span t-esc="line.quantity"/></td>
+                      <td style="padding:8px; text-align:center;"><span t-field="line.price_unit"/></td>
+                      <td style="padding:8px; text-align:right;"><span t-field="line.price_subtotal"/></td>
+                    </tr>
+                  </t>
+                </tbody>
+              </table>
             </div>
-        </xpath>
 
-        <!-- Replace the footer section -->
-        <xpath expr="//div[hasclass('footer')]" position="replace">
-            <div class="footer" style="margin-top: 50px; padding-top: 20px; border-top: 2px solid #2E86AB; text-align: center;">
-                <div style="margin-bottom: 10px;">
-                    <p style="margin: 0; font-weight: bold;">Thank you for your business! Contact: <span t-field="o.company_id.email"/> | <span t-field="o.company_id.phone"/></p>
-                </div>
-                <div style="direction: rtl;">
-                    <p style="margin: 0; font-weight: bold;">شكراً لتعاملكم! <span t-field="o.company_id.email"/> | <span t-field="o.company_id.phone"/> :اتصال</p>
-                </div>
+            <!-- Totals -->
+            <div style="padding:10px 20px; text-align:right;">
+              <p><strong>Subtotal:</strong> <span t-field="o.amount_untaxed"/></p>
+              <p><strong>Tax:</strong> <span t-field="o.amount_tax"/></p>
+              <h3><strong>Total:</strong> <span t-field="o.amount_total"/></h3>
             </div>
-        </xpath>
 
-    </template>
+            <!-- Footer -->
+            <div style="background-color:#1e2b35; color:white; padding:6px 20px; text-align:center; font-size:13px;">
+              <p style="margin:0;">Thank you for your business | شكراً لتعاملكم معنا</p>
+            </div>
+
+          </div>
+        </t>
+      </t>
+    </xpath>
+  </template>
 </odoo>
