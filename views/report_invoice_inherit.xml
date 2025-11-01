@@ -3,32 +3,38 @@
     <xpath expr="." position="replace">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="o">
-          <div class="page" style="font-family: 'Arial'; border-radius:10px; overflow:hidden;">
+          <div class="page" style="font-family:'Arial'; border-radius:10px; overflow:hidden;">
 
-            <!-- ===== Header Section ===== -->
-            <div style="background-color:#213a5c; color:white; padding:15px 25px;">
-              <table style="width:100%; border-collapse:collapse;">
-                <tr>
-                  <td style="width:33%; text-align:left; vertical-align:middle;">
-                    <h2 style="margin:0; font-size:22px; font-weight:bold;">Global Trading Co.</h2>
-                    <p style="margin:0; font-size:16px;">شركة التجارة العالمية</p>
-                  </td>
-                  <td style="width:34%; text-align:center; vertical-align:middle;">
-                    <h3 style="margin:0; font-size:20px; font-weight:bold;">فاتورة / Invoice</h3>
-                    <p style="margin:0; font-size:16px;">INV-<span t-esc="o.name"/></p>
-                  </td>
-                  <td style="width:33%; text-align:right; vertical-align:middle;">
-                    <p style="margin:0; font-size:14px;"><strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/></p>
-                    <p style="margin:0; font-size:14px;"><strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/></p>
-                    <p style="margin:0; font-size:14px;"><strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/></p>
-                  </td>
-                </tr>
-              </table>
+            <!-- HEADER -->
+            <div style="background-color:#213a5c; color:white; padding:20px 25px; display:flex; align-items:center; justify-content:space-between;">
+              <!-- Left: Logo and English -->
+              <div style="flex:1;">
+                <div style="height:60px; width:180px; background-color:white; border-radius:5px; margin-bottom:8px; text-align:center; line-height:60px; color:#213a5c; font-weight:bold;">
+                  LOGO
+                </div>
+                <h2 style="margin:0; font-size:20px;">Global Trading Co.</h2>
+                <p style="margin:0; font-size:16px;">شركة التجارة العالمية</p>
+              </div>
+
+              <!-- Right: Invoice Info -->
+              <div style="text-align:right;">
+                <h3 style="margin:0; font-size:22px;">فاتورة / Invoice</h3>
+                <p style="margin:0; font-size:16px;">INV-<span t-esc="o.name"/></p>
+              </div>
             </div>
 
-            <!-- ===== Line Items ===== -->
-            <div style="padding:15px 25px;">
-              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:14px;">
+            <!-- COMPANY INFO TABLE -->
+            <table style="width:100%; border-collapse:collapse; background-color:#213a5c; color:white; margin-top:0; font-size:15px;">
+              <tr style="border-bottom:1px solid white;">
+                <td style="padding:8px 20px; border-right:1px solid white;"><strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/></td>
+                <td style="padding:8px 20px; border-right:1px solid white;"><strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/></td>
+                <td style="padding:8px 20px;"><strong>Tel:</strong> <span t-esc="o.company_id.phone or ''"/></td>
+              </tr>
+            </table>
+
+            <!-- LINE ITEMS -->
+            <div style="padding:20px;">
+              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:15px;">
                 <thead style="background:#213a5c; color:white;">
                   <tr>
                     <th style="padding:8px; text-align:left;">Description</th>
@@ -40,26 +46,26 @@
                 <tbody>
                   <t t-foreach="o.invoice_line_ids" t-as="line">
                     <tr>
-                      <td style="padding:8px; border-bottom:1px solid #eee;"><span t-esc="line.name"/></td>
-                      <td style="padding:8px; text-align:center; border-bottom:1px solid #eee;"><span t-esc="line.quantity"/></td>
-                      <td style="padding:8px; text-align:center; border-bottom:1px solid #eee;"><span t-field="line.price_unit"/></td>
-                      <td style="padding:8px; text-align:right; border-bottom:1px solid #eee;"><span t-field="line.price_subtotal"/></td>
+                      <td style="padding:8px;"><span t-esc="line.name"/></td>
+                      <td style="padding:8px; text-align:center;"><span t-esc="line.quantity"/></td>
+                      <td style="padding:8px; text-align:center;"><span t-esc="line.price_unit"/></td>
+                      <td style="padding:8px; text-align:right;"><span t-esc="line.price_subtotal"/></td>
                     </tr>
                   </t>
                 </tbody>
               </table>
             </div>
 
-            <!-- ===== Totals ===== -->
-            <div style="padding:10px 25px; text-align:right; font-size:15px;">
-              <p><strong>Subtotal:</strong> <span t-field="o.amount_untaxed"/></p>
-              <p><strong>Tax:</strong> <span t-field="o.amount_tax"/></p>
-              <h3 style="margin-top:8px;"><strong>Total:</strong> <span t-field="o.amount_total"/></h3>
+            <!-- TOTALS -->
+            <div style="padding:10px 20px; text-align:right; font-size:16px;">
+              <p><strong>Subtotal:</strong> <span t-esc="o.amount_untaxed"/></p>
+              <p><strong>Tax:</strong> <span t-esc="o.amount_tax"/></p>
+              <h3><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
             </div>
 
-            <!-- ===== Footer ===== -->
-            <div style="background-color:#213a5c; color:white; padding:8px 25px; text-align:center; font-size:13px; margin-top:10px;">
-              <p style="margin:0;">Thank you for your business | شكراً لتعاملكم معنا</p>
+            <!-- FOOTER -->
+            <div style="background-color:#1e2b35; color:white; padding:10px 20px; text-align:center; font-size:15px;">
+              <p>Thank you for your business | شكراً لتعاملكم معنا</p>
             </div>
 
           </div>
