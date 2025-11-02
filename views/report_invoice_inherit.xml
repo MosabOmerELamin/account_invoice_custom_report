@@ -93,8 +93,7 @@
             <p><strong>Tax:</strong> <span t-esc="o.amount_tax"/></p>
             <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
           </div>
-          <footer class="justify-content-end">
-          <div class="o_footer_content" style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; margin-top:25px; border-top:3px solid #1e2a38; font-size:14px; line-height:1.6;">
+          <div class="custom_footer" style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; margin-top:25px; border-top:3px solid #1e2a38; font-size:14px; line-height:1.6;">
             
             <div style="direction:ltr; text-align:center; margin-bottom:5px;">
               <p style="margin:0; font-weight:500;">
@@ -113,7 +112,6 @@
             </div>
           </div>
         </div>
-      </footer>
 
       </t>
       </t>
