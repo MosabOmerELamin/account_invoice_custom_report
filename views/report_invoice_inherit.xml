@@ -1,6 +1,5 @@
 <odoo>
   <template id="report_invoice_custom_document">
-    <t t-call="web.html_container">
       <t t-call="web.basic_layout">
 
       <t t-foreach="docs" t-as="o">
@@ -8,39 +7,39 @@
         <div class="page" style="font-family:'Arial'; font-size:14px; color:#000; margin:0; padding:0;">
           
           <div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 0 0;">
-            <table style="width:100%; border-collapse:collapse;">
+            <table style="width:100%" class="table table-sm o_main_table table-borderless">
               <tr valign="top">
-                <td style="width:60%; vertical-align:top;">
-                  <table style="width:100%; border-collapse:collapse;">
+                <td style="width:60%;vertical-align:top;">
+                  <table style="width:100%;border-collapse:collapse;">
                     <tr>
                       <td style="width:80px; vertical-align:top;">
                         <img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
                              style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;"
                              alt="Company Logo"/>
                       </td>
-                      <td style="padding-left:10px; vertical-align:top;">
-                        <h2 style="margin:0; font-size:22px;" t-esc="o.company_id.name"/>
-                        <p style="margin:0; font-size:20px;">شركة التجارة العالمية</p>
+                      <td style="padding-left:10px;vertical-align:top;">
+                        <h2 style="margin:0; font-size:22; font-weight:bold; color:white;" t-esc="o.company_id.name"/>
+                        <p style="margin:0; font-size:22; font-weight:bold; color:white;">شركة التجارة العالمية</p>
                       </td>
                     </tr>
                   </table>
                 </td>
 
                 <td style="width:40%; text-align:right; vertical-align:top;">
-                  <h3 style="margin:0; font-size:22px;">فاتورة / Invoice</h3>
-                  <p style="margin:5px 0 0 0; font-size:16px;">
+                  <h3 style="margin:0; font-size:22px;font-weight:bold; color:white;">فاتورة / Invoice</h3>
+                  <p style="margin:5px 0 0 0; font-size:16px;font-weight:bold; color:white;">
                     <span t-esc="o.name"/> / الفاتورة رقم <span t-esc="o.name"/>
                   </p>
                 </td>
               </tr>
             </table>
 
-            <table style="width:100%; border-collapse:collapse; margin-top:20px; table-layout:fixed;">
+            <table style="width:100%;margin-top:20px; table-layout:fixed;" class="table table-sm o_main_table table-borderless">
               <tr>
                 <td style="width:49%; padding-right:5px; vertical-align:top;">
                   <div style="background-color:#4e5f79; padding:10px; border-radius:6px;">
                     <h4 style="margin:0; font-size:15px; font-weight:bold; color:white;">Company Information</h4>
-                    <div style="border-bottom:2px solid white; margin:5px 0;"></div>
+                    <div style="border-bottom:1px solid white; margin:5px 0;"></div>
                     <p style="margin:0 0 6px 0; color:white; font-size:14px;">
                       <strong>CR No:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/><br/>
                       <strong>VAT No:</strong> <span t-esc="o.company_id.vat or ''"/><br/><br/>
@@ -52,7 +51,7 @@
                 <td style="width:49%; padding-left:5px; vertical-align:top;">
                   <div style="background-color:#4e5f79; padding:10px; border-radius:6px; text-align:right;">
                     <h4 style="margin:0; font-size:15px; font-weight:bold; color:white;">معلومات الشركة</h4>
-                    <div style="border-bottom:2px solid white; margin:5px 0;"></div>
+                    <div style="border-bottom:1px solid white; margin:5px 0;"></div>
                     <p style="margin:0; color:white; font-size:14px;" dir="rtl">
                       <strong>السجل التجاري:</strong> <span t-esc="o.company_id.company_registry or ''"/><br/><br/>
                       <strong>الرقم الضريبي:</strong> <span t-esc="o.company_id.vat or ''"/><br/><br/>
@@ -69,7 +68,7 @@
               <thead style="background:#213a5c; color:white;">
                 <tr>
                   <th style="padding:8px; text-align:left;">Description</th>
-                  <th style="padding:8px; text-align:center;">Qty</th>
+<th style="padding:8px; text-align:center;">Qty</th>
                   <th style="padding:8px; text-align:center;">Unit Price</th>
                   <th style="padding:8px; text-align:right;">Amount</th>
                 </tr>
@@ -93,27 +92,51 @@
             <h3 style="margin-top:10px;"><strong>Total:</strong> <span t-esc="o.amount_total"/></h3>
           </div>
 
-            <div style="position: absolute; bottom: 0; left: 0; width: 100%; background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; font-size:14px;">
-              <div style="direction:ltr; text-align:center; margin-bottom:5px;">
-                <p style="margin:0; font-weight:500;">
-                  Thank you for your business! Contact:
-                  <span t-esc="o.company_id.email or 'mosab@gmail.com'"/> |
-                  <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
-                </p>
-              </div>
-              <div style="direction:rtl; text-align:center; font-weight:500;">
-                <p style="margin:0;">
-                  شكراً لتعاملكم معنا، للاتصال:
-                  <span t-esc="o.company_id.email or 'mosab@gmail.com'"/> |
-                  <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
-                </p>
-              </div>
-              <div style="position:absolute; bottom:5px; right:10px; font-size:12px; color:#ccc;">
-                Page <span class="page"/> / <span class="topage"/>
-              </div>
+          <div style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; margin-top:25px; border-top:3px solid #1e2a38; font-size:14px; line-height:1.6;">
+            
+            <div style="direction:ltr; text-align:center; margin-bottom:5px;">
+              <p style="margin:0; font-weight:500;">
+                Thank you for your business! Contact:
+                <span t-esc="o.company_id.email or 'mosab@gmail.com'"/> |
+                <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
+              </p>
             </div>
+
+            <div style="direction:rtl; text-align:center; font-weight:500;">
+              <p style="margin:0;">
+                شكراً لتعاملكم معنا، للاتصال:
+                <span t-esc="o.company_id.email or ''"/> |
+                <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div t-attf-class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;background-color:#2d3e50; color:white; padding:15px 25px;">
+                <ul class="list-inline mb4">
+                    <div style="direction:ltr; text-align:center; ">
+                      <p >
+                        Thank you for your business! Contact:
+                        <span t-esc="o.company_id.email or ''"/> |
+                        <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
+                      </p>
+                  </div>
+
+                  <div style="direction:rtl; text-align:center;">
+                    <p >
+                      شكراً لتعاملكم معنا، للاتصال:
+                      <span t-esc="o.company_id.email or ''"/> |
+                      <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
+                    </p>
+                  </div>
+                </ul>
+                
+            </div>
+        </div>
       </t>
-    </t>
     </t>
   </template>
 
