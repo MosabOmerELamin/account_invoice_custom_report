@@ -85,7 +85,7 @@
                   <td style="width:30%; text-align:center; vertical-align:middle;">
                     <div>
                       <img t-if="o.zatca_qr_code_str"
-                           t-att-src="'data:image/png;base64,%s' % o.zatca_qr_code_str"
+                           t-att-src="'data:image/png;base64,%s' % o.l10n_sa_qr_code_str"
                            style="width:130px; height:auto; margin-bottom:5px;"/>
                       <p style="margin:0; font-weight:bold; font-size:14px;">Tax Invoice<br/>فاتورة ضريبية</p>
                     </div>
