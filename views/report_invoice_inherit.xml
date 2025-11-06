@@ -107,7 +107,7 @@
 
             <!-- ================= INVOICE LINES ================= -->
             <div style="padding:20px;">
-              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:14px;">
+              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:14px;dir="rtl";">
                 <thead style="background:#213a5c; color:white;">
                   <tr>
                     <th style="padding:8px; text-align:right;">الوصف<br/>Description</th>
