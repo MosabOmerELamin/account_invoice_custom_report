@@ -10,6 +10,7 @@
     "data": [
         "views/action_report_invoice_bilingual.xml",
         "views/report_invoice_inherit.xml",
+        "views/res_company_view.xml"
     ],
 
     "installable": True,
