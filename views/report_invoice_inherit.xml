@@ -2,39 +2,32 @@
   <template id="report_invoice_custom_document">
     <t t-call="web.html_container">
       <t t-call="web.basic_layout">
+
         <t t-foreach="docs" t-as="o">
           <div class="page" style="font-family:'Arial'; font-size:14px; color:#000; margin:0; padding:0;">
-
-            <!-- ================= HEADER sa ================= -->
-            <div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 0 0;">
-              <table style="width:100%">
+            <div style="background-color:#213a5c; color:white; padding:25px 30px; border-radius:8px 8px 8px 8px;">
+              <table style="width:100%" class="table table-sm o_main_table table-borderless">
                 <tr valign="top">
                   <td style="width:60%;vertical-align:top;">
                     <table style="width:100%;border-collapse:collapse;">
                       <tr>
                         <td style="width:80px; vertical-align:top;">
                           <img t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
-                               style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;"
-                               alt="Company Logo"/>
-                        </td>
-                        <td style="padding-left:10px;vertical-align:top;">
-                          <h2 style="margin:0; font-size:22px; font-weight:bold; color:white;" t-esc="o.company_id.name"/>
-                          <p style="margin:0; font-size:22px; font-weight:bold; color:white;">شركة التجارة العالمية</p>
+                              style="height:65px; width:auto; border-radius:6px; background:white; padding:5px;"
+                              alt="Company Logo"/>
                         </td>
                       </tr>
                     </table>
                   </td>
 
-                  <td style="width:40%; text-align:right; vertical-align:top;">
-                    <h3 style="margin:0; font-size:22px;font-weight:bold; color:white;">فاتورة / Invoice</h3>
-                    <p style="margin:5px 0 0 0; font-size:16px;font-weight:bold; color:white;">
-                      <span t-esc="o.name"/> / الفاتورة رقم <span t-esc="o.name"/>
-                    </p>
+                  <td style="padding-left:10px;vertical-align:top;text-align:right;">
+                    <h2 style="margin:0; font-size:22; font-weight:bold; color:white;" t-esc="o.company_id.name"/>
+                    <p style="margin:0; font-size:22; font-weight:bold; color:white;" t-esc="o.company_id.company_arabic or ''"/>
                   </td>
                 </tr>
               </table>
 
-              <table style="width:100%;margin-top:20px; table-layout:fixed;">
+              <table style="width:100%;margin-top:20px; table-layout:fixed;" class="table table-sm o_main_table table-borderless">
                 <tr>
                   <td style="width:49%; padding-right:5px; vertical-align:top;">
                     <div style="background-color:#4e5f79; padding:10px; border-radius:6px;">
@@ -61,112 +54,159 @@
                   </td>
                 </tr>
               </table>
-            </div>
 
-            <!-- ================= BUYER INFO + QR ================= -->
-            <div style="margin-top:20px;">
-              <table style="width:100%; border-collapse:collapse;">
+              <div style="margin-top:20px;">
+                <table class="table table-sm o_main_table table-borderless">
+                  <tr>
+                    <td style="width:30%; text-align:center; vertical-align:middle;">
+                      <t t-set="information_block">
+                        <div class="row">
+                            <p class="col-6 me-3">
+                                <img t-if="o.l10n_sa_qr_code_str"
+                                    style="display:block;"
+                                    t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 200, 200)"/>
+                            </p>
+                        </div>
+                      </t>
+                    </td>
+                    <td style="width:70%; vertical-align:top;">
+                      <div style="padding:10px; border-radius:6px;text-align:right;">
+                        <h4 style="margin:0; font-size:16px; font-weight:bold; color:white;">Buyer Information / معلومات العميل</h4>
+                        <div style="border-bottom:1px solid #ccc; margin:5px 0 10px 0;"></div>
+                        <table style="width:100%; font-size:14px; line-height:1.8;">
+                          <tr><td style="color:white;"><span t-esc="o.partner_id.name or ''"/></td><td style="width:40%;color:white;"><strong> : Customer Name / اسم العميل </strong></td></tr>
+                          <tr><td style="color:white;"><span t-esc="o.partner_id.vat or ''"/></td><td style="color:white;"><strong>: VAT No / الرقم الضريبي </strong></td></tr>
+                          <tr><td style="color:white;"><span t-esc="o.partner_id.contact_address or ''"/></td><td style="color:white;"><strong> : Address / العنوان </strong></td></tr>
+                          <tr><td style="color:white;"><span t-esc="o.invoice_date or ''"/></td><td style="color:white;"><strong>: Invoice Date / تاريخ الفاتورة </strong></td></tr>
+                          <tr><td style="color:white;"><span t-esc="o.invoice_date_due or ''"/></td><td style="color:white;"><strong>: Due Date / تاريخ الاستحقاق </strong></td></tr>
+                          <tr><td style="color:white;"><span t-esc="o.invoice_origin or ''"/><td style="color:white;"><strong>: Delivery Date / تاريخ التوصيل  </strong></td></td></tr>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                </div>
+              </div>
+              <br/><br/>
+              <center>
+              <table class="table table-sm o_main_table table-borderless" style="width:70%;font-size:25px;">
                 <tr>
-                 
-  
-                  <td style="width:30%; text-align:center; vertical-align:middle;">
-                    <div>
-                      <img t-if="o.l10n_sa_qr_code_str"
-                           t-att-src="'data:image/png;base64,%s' % o.l10n_sa_qr_code_str"
-                           style="width:130px; height:auto; margin-bottom:5px;"/>
-                    </div>
-                  </td>
-
-                   <td style="width:70%; vertical-align:top;">
-                    <div style="background-color:#f3f3f3; padding:15px; border-radius:6px;">
-                      <h4 style="margin:0; font-size:16px; font-weight:bold; color:#213a5c;">Buyer Information / معلومات العميل</h4>
-                      <div style="border-bottom:1px solid #ccc; margin:5px 0 10px 0;"></div>
-                      <table style="width:100%; font-size:14px; line-height:1.8;">
-                        <tr><td style="width:40%;"><strong>اسم العميل / Customer Name:</strong></td><td><span t-esc="o.partner_id.name or ''"/></td></tr>
-                        <tr><td><strong>الرقم الضريبي / VAT No:</strong></td><td><span t-esc="o.partner_id.vat or ''"/></td></tr>
-                        <tr><td><strong>العنوان / Address:</strong></td><td><span t-esc="o.partner_id.contact_address or ''"/></td></tr>
-                        <tr><td><strong>تاريخ الفاتورة / Invoice Date:</strong></td><td><span t-esc="o.invoice_date or ''"/></td></tr>
-                        <tr><td><strong>تاريخ الاستحقاق / Due Date:</strong></td><td><span t-esc="o.invoice_date_due or ''"/></td></tr>
-                        <tr><td><strong>تاريخ التوصيل / Delivery Date:</strong></td><td><span t-esc="o.invoice_origin or ''"/></td></tr>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-              <table>
-                <tr>
-                  
-                  <td><strong>فاتورة ضريبية </strong></td>
-                  <td><strong>  <span t-esc="o.name"/></strong> </td>
                   <td><strong>Tax Invoice </strong> </td>
-
+                  <td><strong>  <span t-esc="o.name"/></strong> </td>
+                  <td><strong>فاتورة ضريبية </strong></td>
                 </tr>
               </table>
+            </center>
 
-            </div>
-
-            <!-- ================= INVOICE LINES ================= -->
             <div style="padding:20px;">
-              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:14px;">
+              <table style="width:100%; border-collapse:collapse; border:1px solid #ccc; font-size:15px;">
                 <thead style="background:#213a5c; color:white;">
                   <tr>
-                    <th style="padding:8px; text-align:right;">الوصف<br/>Description</th>
-                    <th style="padding:8px; text-align:center;">الكمية<br/>Qty</th>
+                    <th style="padding:8px; text-align:right;">المجموع شامل ضريبة القيمة المضافة<br/>Subtotal<br/>(inclusive of VAT)</th>
+                    <th style="padding:8px; text-align:center;">قيمة الضريبة<br/>VAT Amount</th>
+                    <th style="padding:8px; text-align:center;">المجموع الفرعي بدون الضريبة <br/>Subtotal<br/>(exclusive of VAT)</th>
+                    <th style="padding:8px; text-align:center;">نسبة الضريبة<br/>Taxes</th>
                     <th style="padding:8px; text-align:center;">سعر الوحدة<br/>Unit Price</th>
-                    <th style="padding:8px; text-align:center;">الضريبة<br/>Tax</th>
-                    <th style="padding:8px; text-align:right;">الإجمالي<br/>Total</th>
+                    <th style="padding:8px; text-align:center;">الكمية<br/>Qty</th>
+                    <th style="padding:8px; text-align:right;">الوصف<br/>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <t t-foreach="o.invoice_line_ids" t-as="line">
                     <tr>
-                      <td style="padding:8px; text-align:right;"><span t-esc="line.name"/></td>
-                      <td style="padding:8px; text-align:center;"><span t-esc="line.quantity"/></td>
-                      <td style="padding:8px; text-align:center;"><span t-field="line.price_unit"/></td>
-                      <td style="padding:8px; text-align:center;"><span t-field="line.l10n_gcc_invoice_tax_amount"/></td>
                       <td style="padding:8px; text-align:right;"><span t-field="line.price_total"/></td>
+                      <td style="padding:8px; text-align:center;"><t t-set="tax" t-value="line.price_total - line.price_subtotal" /><span t-field="line.l10n_gcc_invoice_tax_amount"/></td>
+                      <td style="padding:8px; text-align:center;"><span t-field="line.price_subtotal"/></td>
+                      <td class="text-center">
+                          <span t-esc="', '.join(map(lambda x: (str(x.amount)), line.tax_ids))" />
+                      </td>
+                      <td style="padding:8px; text-align:center;"><span t-field="line.price_unit"/></td>
+                      <td style="padding:8px; text-align:center;"><span t-esc="line.quantity"/></td>
+                      <td style="padding:8px; text-align:right;"><span t-esc="line.name"/></td>
                     </tr>
                   </t>
                 </tbody>
               </table>
             </div>
 
-            <!-- ================= TOTALS SECTION ================= -->
-            <div style="padding:10px 25px; text-align:right; font-size:16px;">
-              <p><strong>الإجمالي الفرعي / Subtotal:</strong> <span t-field="o.amount_untaxed"/></p>
-              <p><strong>قيمة الضريبة / VAT Amount:</strong> <span t-field="o.amount_tax"/></p>
-              <h3 style="margin-top:10px;"><strong>الإجمالي / Total:</strong> <span t-field="o.amount_total"/></h3>
-
-              <!-- Paid + Amount Due -->
-              <t t-set="payments_vals" t-value="o.sudo().invoice_payments_widget and o.sudo().invoice_payments_widget['content'] or []"/>
-              <t t-foreach="payments_vals" t-as="payment_vals">
-                <p><strong>Paid on / دفعت في:</strong>
-                   <span t-out="payment_vals['date']"/> |
-                   <span t-out="payment_vals['amount']"
-                         t-options='{"widget":"monetary","display_currency":o.currency_id}'/>
-                </p>
-              </t>
-              <t t-if="len(payments_vals) > 0">
-                <p style="font-weight:bold;">Amount Due / المبلغ المستحق:
-                  <span t-field="o.amount_residual"/>
-                </p>
-              </t>
-            </div>
-
-            <!-- ================= FOOTER ================= -->
-            <div style="background-color:#2d3e50; color:white; padding:15px 25px; text-align:center; margin-top:25px; border-top:3px solid #1e2a38; font-size:14px; line-height:1.6;">
-              <p style="margin:0;">Thank you for your business! Contact:
-                <span t-esc="o.company_id.email or 'info@example.com'"/> |
-                <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
-              </p>
-              <p style="margin:0;" dir="rtl">شكراً لتعاملكم معنا، للاتصال:
-                <span t-esc="o.company_id.email or ''"/> |
-                <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
-              </p>
-            </div>
+            <div class="row" style="font-size: 13px;page-break-inside: avoid;">
+              <div class="col-12">
+                  <table class="table table-condensed">
+                      <colgroup>
+                          <col width='40%' />
+                          <col width='20%' />
+                          <col width='40%' />
+                      </colgroup>
+                      <tr class="border-black">
+                          <td class="text-left" style="padding:0px;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <strong>Total (Excluding VAT)</strong>
+                          </td>
+                          <td class="text-center" style="font-size:16px;padding:0px;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <span t-esc="o.amount_untaxed" t-options='{"widget":"monetary","display_currency":o.currency_id}'/>
+                          </td>
+                          <td class="text-right" style="padding:0px;direction: rtl;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <strong>الاجمالي (غير شامل ضريبة القيمة المضافة)</strong>
+                          </td>
+                      </tr>
+                      <tr class="border-black">
+                          <td class="text-left" style="padding:0px;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <strong>Total VAT</strong>
+                          </td>
+                          <td class="text-center" style="font-size:16px;padding:0px;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <span t-esc="o.amount_tax" t-options='{"widget":"monetary","display_currency":o.currency_id}'/>
+                          </td>
+                          <td class="text-right" style="padding:0px;direction: rtl;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <strong>اجمالي ضريبة القيمة المضافة</strong>
+                          </td>
+                      </tr>
+                      <tr class="border-black">
+                          <td class="text-left" style="padding:0px;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <strong>Invoice Taxable Amount</strong>
+                          </td>
+                          <td class="text-center" style="font-size:16px;padding:0px;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <span t-esc="o.amount_total" t-options='{"widget":"monetary","display_currency":o.currency_id}'/>
+                          </td>
+                          <td class="text-right" style="padding:0px;direction: rtl;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <strong>المبلغ الخاضع للضريبة غير شامل ضريبة القيمة المضافة</strong>
+                          </td>
+                      </tr>
+                      <tr class="border-black">
+                        <t t-set="payments_vals" t-value="o.sudo().invoice_payments_widget and o.sudo().invoice_payments_widget['content'] or []"/>
+                        <t t-foreach="payments_vals" t-as="payment_vals">
+                          <td class="text-left" style="padding:0px;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <strong>Paid on <span t-out="payment_vals['date']"/> </strong>
+                          </td>
+                          <td class="text-center" style="font-size:16px;padding:0px;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <span t-out="payment_vals['amount']"
+                                t-options='{"widget":"monetary","display_currency":o.currency_id}'/>
+                          </td>
+                          <td class="text-right" style="padding:0px;direction: rtl;border-top: none!important;border-bottom:1px solid #0d3543;">
+                              <strong> دفعت في <span t-out="payment_vals['date']"/> </strong>
+                          </td>
+                        </t>
+                      </tr>
+                  </table>
+              </div>
           </div>
-        </t>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer">
+          <div style="background-color:#2d3e50;color:white;text-align:center;">
+            <p style="margin:0;direction:ltr;">
+              Thank you for your business! Contact:
+              <span t-esc="o.company_id.email or 'info@yourcompany.com'"/> |
+              <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
+            </p>
+            <p style="margin:0;direction:rtl;">
+              شكراً لتعاملكم معنا ، للاتصال:
+              <span t-esc="o.company_id.email or 'info@yourcompany.com'"/> | 
+              <span t-esc="o.company_id.phone or '+1 555-555-5556'"/>
+            </p>
+          </div>
+        </div>
+      </t>
       </t>
     </t>
   </template>
+
 </odoo>
